@@ -1,165 +1,96 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>mattata</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0"/>
-		<meta name="description" content="A plugin-based bot for Telegram; written in Lua, with ❤️"/>
-		<link href="http://mattata.pw" rel="canonical"/>
-		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-		<style>
-			@font-face {
-				font-family: BelloPro;
-				src: url(../fonts/BelloPro.ttf) format("truetype"), url(../fonts/BelloPro.woff) format("woff");
-			}
-			body {
-				background-color: #6389a8;
-				color: #fff;
-				line-height: 1.6;
-				text-shadow: 0 1px 0 #000;
-			}
-			a {
-				font-family: "Roboto Slab", serif;
-				font-size: 1em;
-				border-bottom: 1px solid #fff;
-				color: #fff;
-				text-decoration: none;
-			}
-			a:hover {
-				border-bottom: 0
-			}
-			#heading {
-				font-family: BelloPro;
-				font-size: 4em;
-				line-height: 1.3;
-			}
-			#body p {
-				font-family: "Roboto Slab", serif;
-				font-size: 1em;
-			}
-		</style>
-	</head>
-	<body onload="init()">
-		<script type="text/javascript" src="js/ThreeCanvas.js"></script>
-		<script type="text/javascript" src="js/Snow.js"></script>
-		<script>
-			var SCREEN_WIDTH = window.innerWidth;
-			var SCREEN_HEIGHT = window.innerHeight;
-			
-			var container;
-
-			var particle;
-
-			var camera;
-			var scene;
-			var renderer;
-
-			var mouseX = 0;
-			var mouseY = 0;
-
-			var windowHalfX = window.innerWidth / 2;
-			var windowHalfY = window.innerHeight / 2;
-			
-			var particles = []; 
-			var particleImage = new Image();
-			particleImage.src = 'img/ParticleSmoke.png'; 
-
-		
-		
-			function init() {
-
-				container = document.createElement('div');
-				document.body.appendChild(container);
-
-				camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
-				camera.position.z = 1000;
-
-				scene = new THREE.Scene();
-				scene.add(camera);
-					
-				renderer = new THREE.CanvasRenderer();
-				renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-				var material = new THREE.ParticleBasicMaterial( { map: new THREE.Texture(particleImage) } );
-					
-				for (var i = 0; i < 500; i++) {
-
-					particle = new Particle3D( material);
-					particle.position.x = Math.random() * 2000 - 1000;
-					particle.position.y = Math.random() * 2000 - 1000;
-					particle.position.z = Math.random() * 2000 - 1000;
-					particle.scale.x = particle.scale.y =  1;
-					scene.add( particle );
-					
-					particles.push(particle); 
-				}
-
-				container.appendChild( renderer.domElement );
-
-	
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-				
-				setInterval( loop, 1000 / 60 );
-				
-			}
-			
-			function onDocumentMouseMove( event ) {
-
-				mouseX = event.clientX - windowHalfX;
-				mouseY = event.clientY - windowHalfY;
-			}
-
-			function onDocumentTouchStart( event ) {
-
-				if ( event.touches.length == 1 ) {
-
-					event.preventDefault();
-
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-				}
-			}
-
-			function onDocumentTouchMove( event ) {
-
-				if ( event.touches.length == 1 ) {
-
-					event.preventDefault();
-
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-				}
-			}
-
-			function loop() {
-
-			for(var i = 0; i<particles.length; i++)
-				{
-
-					var particle = particles[i]; 
-					particle.updatePhysics(); 
-	
-					with(particle.position)
-					{
-						if(y<-1000) y+=2000; 
-						if(x>1000) x-=2000; 
-						else if(x<-1000) x+=2000; 
-						if(z>1000) z-=2000; 
-						else if(z<-1000) z+=2000; 
-					}				
-				}
-			
-				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-				camera.lookAt(scene.position); 
-
-				renderer.render( scene, camera );
-
-				
-			}
-		</script>
-		<div id="heading">mattata</div>
-		<div id="body"><p><br>A plugin-based bot for Telegram; written in Lua, made with ❤.️<br>Created and maintained by <a href="https://telegram.me/wrxck">@wrxck</a>.<br>This project is open source and can be found <a href="https://github.com/matthewhesketh/mattata">on GitHub</a>!<br><br><br>&copy; Matthew Hesketh, 2016<br></p></div>
-	</body>
+<head>
+	<title>mattata - A powerful, multi-purpose Telegram bot</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mattata is a powerful multi-purpose bot written in Lua, with a full framework binding it to the Telegram bot API">
+    <meta name="author" content="Matthew Hesketh">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/mattata.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hidden"><a href="#page-top"></a></li>
+                    <li><a class="page-scroll" href="#about">About</a></li>
+                    <li><a class="page-scroll" href="#fork">Fork</a></li>
+                    <li><a class="page-scroll" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="mattata-heading">mattata</h1>
+                        <p class="intro-text">An open source Telegram bot written in Lua<br>Made with <i class="pink fa fa-heart fa-fw"></i></p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>What is mattata?</h2>
+                <p>mattata is a plugin-based bot for Telegram Messenger, written in Lua and open source. You are free to <a class="page-scroll" href="#about">fork</a> mattata and, well, do what you wish with it - just abide by the <a href="license.txt">license</a>.</p>
+                <p>Originally based upon <a href="http://otou.to">otouto</a>, mattata has been re-shaped and improved over time to provide an immersive experience for users of any age. Notable features include a Cleverbot implementation (which uses my own <a href="https://github.com/matthewhesketh/mattataAi">Lua library</a>), group administration functionality and a robust configurable plugin system. These plugins all provide a unique purpose and are frequently improved.</p>
+            </div>
+        </div>
+    </section>
+    <section id="fork" class="content-section text-center">
+        <div class="fork-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Fork mattata</h2>
+                    <p>You can fork mattata's source code and documentation - freely available on the GitHub repository.</p>
+                    <a href="https://github.com/matthewhesketh/mattata" class="btn btn-default btn-lg">Source Code</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact me</h2>
+                <p>If you have a question, or you just want to leave some feedback, you can do so by sending me an email - and I'll respond as soon as I can.</p>
+                <p><a href="mailto:matthew@matthewhesketh.com">matthew@matthewhesketh.com</a></p>
+                <ul class="list-inline banner-social-buttons">
+                    <li><a href="https://fb.me/wrxck" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a></li>
+                    <li><a href="https://github.com/matthewhesketh" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">GitHub</span></a></li>
+                    <li><a href="https://telegram.me/wrxck" class="btn btn-default btn-lg"><i class="fa fa-telegram fa-fw"></i> <span class="network-name">Telegram</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Matthew Hesketh 2016</p>
+        </div>
+    </footer>
+    <script src="js/mattata.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+</body>
 </html>
