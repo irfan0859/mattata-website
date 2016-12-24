@@ -11,48 +11,26 @@
     <link href="css/mattata.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
     <script src="https://use.fontawesome.com/b9b6b785d9.js"></script>
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-	window.mattataSmoothScroll = function(target) {
-		var mattataScroll = target;
-		do {
-			mattataScroll = mattataScroll.parentNode;
-			if (!mattataScroll) return;
-			mattataScroll.scrollTop += 1;
-		} while (mattataScroll.scrollTop == 0);
-	
-		var targetY = 0;
-		do {
-			if (target == mattataScroll) break;
-			targetY += target.offsetTop;
-		} while (target = target.offsetParent);
-	
-		scroll = function(c, a, b, i) {
-			i++; if (i > 30) return;
-			c.scrollTop = a + (b - a) / 30 * i;
-			setTimeout(function(){ scroll(c, a, b, i); }, 20);
-		}
-		scroll(mattataScroll, mattataScroll.scrollTop, targetY, 0);
-	}
-	</script>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    Menu <i class="fa fa-bars"></i>
+                	<i class="fa fa-bars"></i>
                 </button>
             </div>
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li class="hidden"><a href="#page-top"></a></li>
-                    <li><a class="page-scroll" onclick="mattataSmoothScroll(document.getElementById('about'))">About</a></li>
-                    <li><a class="page-scroll" onclick="mattataSmoothScroll(document.getElementById('fork'))">Fork</a></li>
-                    <li><a class="page-scroll" onclick="mattataSmoothScroll(document.getElementById('contact'))">Contact</a></li>
+                    <li><a class="page-scroll" href="#about">About</a></li>
+                    <li><a class="page-scroll" href="#fork">Fork</a></li>
+                    <li><a class="page-scroll" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -64,7 +42,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="mattata-heading">mattata</h1>
                         <p class="intro-text">An open source Telegram bot written in Lua<br>Made with <i class="pink fa fa-heart fa-fw"></i></p>
-                        <a onclick="mattataSmoothScroll(document.getElementById('about'))" class="btn btn-circle page-scroll">
+                        <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
@@ -76,7 +54,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>What is mattata?</h2>
-                <p>mattata is a plugin-based bot for Telegram Messenger, written in Lua and open source. You are free to <a class="page-scroll" onclick="mattataSmoothScroll(document.getElementById('fork'))">fork</a> mattata and, well, do what you wish with it - just abide by the <a href="license.txt">license</a>.</p>
+                <p>mattata is a plugin-based bot for Telegram Messenger, written in Lua and open source. You are free to <a class="page-scroll" href="#fork">fork</a> mattata and, well, do what you wish with it - just abide by the <a href="license.txt">license</a>.</p>
                 <p>Originally based upon <a href="http://otou.to">otouto</a>, mattata has been re-shaped and improved over time to provide an immersive experience for users of any age. Notable features include a Cleverbot implementation (which uses my own <a href="https://github.com/matthewhesketh/mattataAi">Lua library</a>), group administration functionality and a robust configurable plugin system. These plugins all provide a unique purpose and are frequently improved.</p>
             </div>
         </div>
@@ -100,9 +78,9 @@
                 <p><a href="mailto:matthew@matthewhesketh.com">matthew@matthewhesketh.com</a></p>
                 <ul class="list-inline banner-social-buttons">
                     <li><a href="https://fb.me/wrxck" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a></li>
-                    <li><a href="https://github.com/matthewhesketh" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">GitHub</span></a></li>
                     <li><a href="https://telegram.me/wrxck" class="btn btn-default btn-lg"><i class="fa fa-telegram fa-fw"></i> <span class="network-name">Telegram</span></a></li>
                 </ul>
+                <br><br><a class="github-button" href="https://github.com/matthewhesketh" data-style="mega" data-count-href="/matthewhesketh/followers" data-count-api="/users/matthewhesketh#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @matthewhesketh on GitHub">Follow @matthewhesketh</a><br><br><br><br>
             </div>
         </div>
     </section>
@@ -111,9 +89,34 @@
             <p>Copyright &copy; Matthew Hesketh 2016</p>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/mattata.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script>
+		function collapseNavbar() {
+			if ($(".navbar").offset().top > 50) {
+				$(".navbar-fixed-top").addClass("top-nav-collapse");
+			} else {
+				$(".navbar-fixed-top").removeClass("top-nav-collapse");
+			}
+		}
+
+		$(window).scroll(collapseNavbar);
+		$(document).ready(collapseNavbar);
+
+		$(function() {
+			$('a.page-scroll').bind('click', function(event) {
+				var $anchor = $(this);
+				$('html, body').stop().animate({
+					scrollTop: $($anchor.attr('href')).offset().top
+				}, 1500, 'easeInOutExpo');
+				event.preventDefault();
+			});
+		});
+
+		$('.navbar-collapse ul li a').click(function() {
+			$(this).closest('.collapse').collapse('toggle');
+		});
+	</script>
 </body>
 </html>

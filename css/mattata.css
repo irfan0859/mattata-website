@@ -79,9 +79,11 @@ a:focus {
 	color: white;
 }
 .navbar-custom .nav li a {
-	-webkit-transition: background 0.3s ease-in-out;
-	-moz-transition: background 0.3s ease-in-out;
-	transition: background 0.3s ease-in-out;
+	-webkit-transition: background .3s ease-in-out;
+	-moz-transition: background .3s ease-in-out;
+	-ms-transition: background .3s ease-in-out;
+	-o-transition: background .3s ease-in-out;
+	transition: background .3s ease-in-out;
 }
 .navbar-custom .nav li a:hover {
 	color: rgba(255, 255, 255, .8);
@@ -110,13 +112,19 @@ a:focus {
 		background-color: rgba(0, 0, 0, .9);
 		-webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
 		-moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+		-ms-transition: background .5s ease-in-out, padding .5s ease-in-out;
+		-o-transition: background .5s ease-in-out, padding .5s ease-in-out;
 		transition: background .5s ease-in-out, padding .5s ease-in-out;
+		z-index: 3;
 	}
 	.navbar-custom.top-nav-collapse {
 		padding: 0;
 		border-bottom: 1px solid rgba(255, 255, 255, .3);
 		z-index: 3;
 	}
+}
+.navbar-collapse {
+	background-color: rgba(0, 0, 0, .9);
 }
 .intro {
 	display: table;
@@ -129,8 +137,9 @@ a:focus {
 	z-index: 1;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	background-size: cover;
+	-ms-background-size: cover;
 	-o-background-size: cover;
+	background-size: cover;
 }
 .intro .intro-body {
 	display: table-cell;
@@ -276,6 +285,9 @@ a:focus {
 	100% {
 		transform: scale(1);
 	}
+}
+.navbar-header {
+	background-color: rgba(0, 0, 0, .9);
 }
 .content-section {
 	padding-top: 100px;
