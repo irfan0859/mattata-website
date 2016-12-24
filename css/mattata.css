@@ -55,7 +55,6 @@ a:focus {
 }
 .navbar-custom {
 	margin-bottom: 0;
-	border-bottom: 1px solid rgba(255, 255, 255, .3);
 	text-transform: uppercase;
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	z-index: 2;
@@ -66,16 +65,16 @@ a:focus {
 	font-size: 12px;
 }
 .navbar-custom .navbar-toggle:focus,
-.navbar-custom .navbar-toggle:active {
+.navbar-custom .navbar-toggle:active,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .nav li.active {
 	outline: none;
 }
 .navbar-custom .navbar-brand {
 	font-weight: 700;
 }
-.navbar-custom .navbar-brand:focus {
-	outline: none;
-}
-.navbar-custom a {
+.navbar-custom a,
+.navbar-custom .nav li.active a:hover {
 	color: white;
 }
 .navbar-custom .nav li a {
@@ -95,14 +94,8 @@ a:focus {
 	outline: none;
 	background-color: rgba(0, 0, 0, .5);
 }
-.navbar-custom .nav li.active {
-	outline: none;
-}
 .navbar-custom .nav li.active a {
 	background-color: rgba(255, 255, 255, .3);
-}
-.navbar-custom .nav li.active a:hover {
-	color: white;
 }
 @media (min-width: 768px) {
 	.navbar-custom {
